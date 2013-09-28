@@ -10,4 +10,4 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install lsb-release
+RUN apt-get -y install lsb-release wget

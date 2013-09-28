@@ -1,7 +1,6 @@
 FROM mikz/base:precise
 MAINTAINER Michal Cichra <michal.cichra@gmail.com>
 
-RUN apt-get -y install wget
 RUN wget -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 
