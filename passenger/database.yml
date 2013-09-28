@@ -1,0 +1,1 @@
+production: <%= ENV['DB_URL'] %>

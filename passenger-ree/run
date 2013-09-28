@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+def bundle
+  system('bundle install --deployment --without development test')
+end
+
+def start
+  system('passenger start --no-compile-runtime -e production')
+end
+
+cmd = ARGV.shift
+case cmd
+when 'bundle'
+  bundle
+when 'start'
+  bundle && start
+when 'cmd'
+  exec(*ARGV)
+end
