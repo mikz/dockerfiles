@@ -20,10 +20,5 @@ RUN gem install bundler
 
 WORKDIR /www
 
-# RUN bundle install
-# ENV prevents other dockerfiles from this image to be cached
-#ENV RAILS_ENV production
-
-ENTRYPOINT ["passenger"]
 VOLUME ["/www/public/system"]
-CMD ["start", "-e=production"]
+
