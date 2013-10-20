@@ -12,11 +12,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -c -s`-pgdg 
 
 RUN apt-get -y update
 
-RUN apt-get -y install passenger
+RUN apt-get -y --force-yes install ruby1.8 passenger
 RUN apt-get -y install libxml2-dev libxslt1-dev postgresql-client libpq-dev
-
-ENV RUBY_VERSION 1.8
-RUN apt-get -y install ruby$(RUBY_VERSION)
 
 RUN echo "gem: --no-ri --no-rdoc" > /etc/gemrc
 RUN gem install bundler
