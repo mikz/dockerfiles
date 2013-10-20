@@ -8,6 +8,7 @@ RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get -y install lsb-release wget
+# this env variable disables caching in other images depending on this one
+# ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install python-software-properties lsb-release wget
