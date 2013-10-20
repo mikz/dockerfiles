@@ -18,10 +18,11 @@ RUN echo "gem: --no-ri --no-rdoc" > /etc/gemrc
 WORKDIR /www
 
 # RUN bundle install
-ENV RAILS_ENV production
+# Unfortunately setting ENV busts docker cache
+# ENV RAILS_ENV production
 
 RUN gem install passenger bundler
 
 ENTRYPOINT ["passenger"]
-CMD ["start"]
+CMD ["start", "-e=production"]
 EXPOSE 3000

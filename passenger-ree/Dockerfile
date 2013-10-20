@@ -18,15 +18,12 @@ RUN apt-get -y install libxml2-dev libxslt1-dev postgresql-client libpq-dev
 RUN echo "gem: --no-ri --no-rdoc" > /etc/gemrc
 RUN gem install bundler
 
-# ADD . /www
 WORKDIR /www
 
 # RUN bundle install
-ENV RAILS_ENV production
-
-ENV BUNDLE_PATH /var/cache/bundle
-RUN mkdir -p $BUNDLE_PATH
+# ENV prevents other dockerfiles from this image to be cached
+#ENV RAILS_ENV production
 
 ENTRYPOINT ["passenger"]
 VOLUME ["/www/public/system"]
-CMD ["start"]
+CMD ["start", "-e=production"]
