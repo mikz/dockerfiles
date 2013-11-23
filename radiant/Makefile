@@ -1,4 +1,4 @@
-REPO=docker.o2h.cz/radiant
+REPO=mikz/radiant
 
 all: build
 

@@ -20,5 +20,4 @@ RUN gem install bundler
 
 WORKDIR /www
 
-VOLUME ["/www/public/system"]
-
+#VOLUME ["/www/public/system"]
