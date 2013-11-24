@@ -21,4 +21,4 @@ fi
 CMD="${PG_PATH}${PARAMS}"
 echo "RUN: ${CMD}"
 chown postgres:postgres "$PGDATA"
-su postgres -c "${CMD}"
+exec su postgres -c "exec ${CMD}"
