@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PARAMS="${@}"
+CMD="${@}"
 
 if [ -z "$PG_VERSION" ]
   then
@@ -18,7 +18,6 @@ if [ -z "$1" ]
     exit 1
 fi
 
-CMD="${PG_PATH}${PARAMS}"
 echo "RUN: ${CMD}"
 chown postgres:postgres "$PGDATA"
-exec su postgres -c "exec ${CMD}"
+exec su postgres -c "PATH=\"$PG_PATH:\$PATH\" ${CMD}"
