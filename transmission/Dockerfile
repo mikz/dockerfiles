@@ -19,6 +19,9 @@ RUN gem1.9.1 install prss --no-rdoc --no-ri
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
 RUN chmod 600 /etc/ssh/sshd_config
+ADD crontab /root/crontab
+
+RUN crontab -u transmission /root/crontab && rm /root/crontab
 
 WORKDIR /mnt/storage/
 
