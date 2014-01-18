@@ -1,2 +1,4 @@
-# m h  dom mon dow   command
-* * * * * prss `cat ~/watch/prss-key` ~/watch >> /dev/null 2>&1
+MAILTO=root
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# m h  dom mon dow user   command
+* * * * * transmission prss $(cat /mnt/storage/watch/prss-key) /mnt/storage/watch > /dev/null
