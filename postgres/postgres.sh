@@ -18,6 +18,16 @@ if [ -z "$1" ]
     exit 1
 fi
 
+if [ "$(ls -A "$PGDATA")" ]
+  then
+    echo "$PGDATA is not empty, continuing"
+  else if [ "$1" != "initdb" ]
+    then
+      echo "$PGDATA is empty, will initialize it"
+      ./$0 initdb
+    fi
+fi
+
 echo "RUN: ${CMD}"
 chown postgres:postgres "$PGDATA"
 exec su postgres -c "PATH=\"$PG_PATH:\$PATH\" ${CMD}"
