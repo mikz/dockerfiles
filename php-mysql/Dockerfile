@@ -16,7 +16,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C \
 RUN apt-get -y -q update \
  && apt-get -y -q install mariadb-client mariadb-server \
  && apt-get -y -q install php5-fpm php5-mysqlnd nginx \
- && apt-get -q -q install supervisor \
+ && apt-get -y -q install supervisor \
  && apt-cleanup
 
 RUN echo "[mysqld]\nbind-address = 0.0.0.0" > /etc/mysql/conf.d/listen.cnf \
@@ -27,6 +27,6 @@ ADD fastcgi_params /etc/nginx/
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD php-fpm.conf /etc/php5/fpm/
 
-EXPOSE 80
+CMD ["supervisord"]
 
-CMD ["supervisord", "-n"]
+EXPOSE 80

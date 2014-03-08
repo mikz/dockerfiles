@@ -11,6 +11,11 @@ RUN apt-key add /root/ACCC4CF8.asc \
                           postgresql-client libpq-dev \
                           curl apt-transport-https \
                           build-essential make \
+                          supervisor \
  && apt-cleanup
+
+ADD supervisord.conf /etc/supervisor/supervisord.conf
+
+ONBUILD CMD ["supervisord"]
 
 ENV NUM_CPU grep -c processor /proc/cpuinfo

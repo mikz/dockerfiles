@@ -13,6 +13,7 @@ ENV PGDATA /data
 RUN apt-get -q -y update \
  && apt-get install -q -y postgresql-$PG_VERSION postgresql-client-$PG_VERSION postgresql-contrib-$PG_VERSION \
  && /usr/share/locales/install-language-pack $LOCALE \
+ && apt-get install -q -y supervisor \
  && apt-cleanup
 
 # why these are commented?
@@ -22,12 +23,9 @@ RUN apt-get -q -y update \
 RUN mkdir -p $PGDATA \
  && chown postgres:postgres $PGDATA
 
-RUN apt-get -q -y update && apt-get -y -q install supervisor
-ADD supervisord.conf /etc/supervisor/supervisord.conf
-
 ADD postgres.sh /var/lib/postgresql/postgres.sh
 RUN chmod +x /var/lib/postgresql/postgres.sh
+ADD supervisord.conf /etc/supervisor/supervisord.conf
 
-ENTRYPOINT ["/var/lib/postgresql/postgres.sh"]
-CMD ["supervisord", "-n"]
+CMD ["supervisord"]
 EXPOSE 5432

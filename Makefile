@@ -8,5 +8,13 @@ DOCKERS = base hosting passenger postgres passenger-ree php-mysql transmission
 build: $(DOCKERS)
 push: $(DOCKERS)
 
+
+hosting: base
+passenger: hosting
+postgres: hosting
+passenger-ree: hosting
+php-mysql: base
+
 $(DOCKERS):
-	$(MAKE) -C $@ $(MAKECMDGOALS)
+	$(MAKE) -C $@
+

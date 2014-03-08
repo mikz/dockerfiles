@@ -8,13 +8,16 @@ RUN apt-add-repository -y ppa:brightbox/ruby-ng \
 
 RUN gem install passenger bundler
 
+ADD supervisor.conf /etc/supervisor/conf.d/passenger.conf
+
+ENV RAILS_ENV production
+
 WORKDIR /www
 
 ONBUILD ADD . /www
 ONBUILD ADD config/docker/ /www/config
 ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
 
-ENV RAILS_ENV production
-ENTRYPOINT ["passenger", "start"]
+ONBUILD CMD ["supervisord"]
 
 EXPOSE 3000

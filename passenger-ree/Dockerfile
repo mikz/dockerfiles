@@ -9,7 +9,7 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 \
 RUN apt-get -q -y install git imagemagick libmagickwand-dev
 RUN apt-get -y --force-yes install ruby-dev passenger rubygems
 
-RUN apt-cleanup
+ADD supervisor.conf /etc/supervisor/conf.d/passenger.conf
 
 RUN gem install bundler
 
@@ -18,5 +18,7 @@ WORKDIR /www
 ONBUILD ADD . /www
 ONBUILD ADD config/docker/ /www/config
 ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
+
+ONBUILD CMD ["supervisord"]
 
 #VOLUME ["/www/public/system"]
