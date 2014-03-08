@@ -11,6 +11,7 @@ RUN gem install passenger bundler
 WORKDIR /www
 
 ONBUILD ADD . /www
+ONBUILD ADD config/docker/ /www/config
 ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
 
 ENV RAILS_ENV production
