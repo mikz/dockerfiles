@@ -22,7 +22,12 @@ RUN apt-get -q -y update \
 RUN mkdir -p $PGDATA \
  && chown postgres:postgres $PGDATA
 
-ADD postgres.sh /root/postgres.sh
-ENTRYPOINT ["/root/postgres.sh"]
-CMD ["postgres"]
+RUN apt-get -q -y update && apt-get -y -q install supervisor
+ADD supervisord.conf /etc/supervisor/supervisord.conf
+
+ADD postgres.sh /var/lib/postgresql/postgres.sh
+RUN chmod +x /var/lib/postgresql/postgres.sh
+
+ENTRYPOINT ["/var/lib/postgresql/postgres.sh"]
+CMD ["supervisord", "-n"]
 EXPOSE 5432

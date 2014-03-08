@@ -29,5 +29,11 @@ if [ "$(ls -A "$PGDATA")" ]
 fi
 
 echo "RUN: ${CMD}"
-chown postgres:postgres "$PGDATA"
-exec su postgres -c "PATH=\"$PG_PATH:\$PATH\" ${CMD}"
+
+if [ "$(whoami)" == "root" ]
+  then
+    chown postgres:postgres "$PGDATA"
+    exec su postgres -c "PATH=\"$PG_PATH:\$PATH\" ${CMD}"
+  else
+    PATH="$PG_PATH:$PATH" exec $CMD
+fi
