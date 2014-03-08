@@ -1,5 +1,8 @@
-Beware, docker (0.6.4) does not cache build steps when parent image contains:
+# Dockerfiles
 
-* ENV
-* EXPOSE
-* ENTRYPOINT
+Collection of dockerfiles for hosting webapps.
+
+```
+make # build all images
+make release # push all images to the docker index
+```

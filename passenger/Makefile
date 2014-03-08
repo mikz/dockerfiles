@@ -5,5 +5,6 @@ all: build
 
 build:
 	docker build -t $(REPO):$(TAG) -rm .
+
 push:
 	docker push $(REPO)

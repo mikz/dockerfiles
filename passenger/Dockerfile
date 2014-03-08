@@ -1,18 +1,19 @@
-FROM mikz/base:precise
+FROM mikz/hosting:precise
 MAINTAINER Michal Cichra <michal.cichra@gmail.com>
 
-RUN wget -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-
-RUN apt-add-repository -y ppa:brightbox/ruby-ng
-
-RUN apt-get -y update
-
-RUN apt-get -y install ruby1.9.3 rubygems
-RUN apt-get -y install curl libxml2-dev libxslt1-dev postgresql-client libpq-dev
-
-RUN echo "gem: --no-ri --no-rdoc" > /etc/gemrc
+RUN apt-add-repository -y ppa:brightbox/ruby-ng \
+ && apt-get -q -y update \
+ && apt-get -q -y install ruby1.9.3 rubygems \
+ && apt-cleanup
 
 RUN gem install passenger bundler
 
 WORKDIR /www
+
+ONBUILD ADD . /www
+ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
+
+ENV RAILS_ENV production
+ENTRYPOINT ["passenger", "start"]
+
+EXPOSE 3000

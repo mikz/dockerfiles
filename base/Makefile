@@ -1,5 +1,8 @@
 REPO=mikz/base
 
+.DEFAULT: build
+.PHONY: build push all
+
 all: build
 
 build:
