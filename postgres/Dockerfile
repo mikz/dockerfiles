@@ -28,4 +28,5 @@ RUN chmod +x /var/lib/postgresql/postgres.sh
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 
 CMD ["supervisord"]
+
 EXPOSE 5432
