@@ -25,6 +25,7 @@ if [ "$(ls -A "$PGDATA")" ]
     then
       echo "$PGDATA is empty, will initialize it"
       ./$0 initdb
+      echo "listen_addresses = '*'" >> $PGDATA/postgresql.conf
     fi
 fi
 
