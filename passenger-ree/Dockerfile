@@ -15,9 +15,11 @@ RUN gem install bundler
 
 WORKDIR /www
 
+ONBUILD ADD Gemfile /www/
+ONBUILD ADD Gemfile.lock /www/
+ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
 ONBUILD ADD . /www
 ONBUILD ADD config/docker/ /www/config
-ONBUILD RUN bundle install --deployment --without test development --jobs `$NUM_CPU`
 ONBUILD ENV RAILS_ENV production
 ONBUILD CMD ["supervisord"]
 ONBUILD EXPOSE 3000
