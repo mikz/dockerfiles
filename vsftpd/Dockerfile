@@ -6,7 +6,8 @@ ADD vsftpd.conf /etc/
 ADD vsftpd.sh /root/
 
 RUN mkdir -p /var/run/vsftpd/empty \
- && chmod +x /root/vsftpd.sh
+ && chmod +x /root/vsftpd.sh \
+ && chown root:root /etc/vsftpd.conf
 
 VOLUME /ftp/
 
