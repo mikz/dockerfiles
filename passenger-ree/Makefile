@@ -5,10 +5,10 @@ IMAGE=$(REPO):$(TAG)
 all: build
 
 build:
-	docker build -t $(IMAGE) -rm .
+	docker build -t $(IMAGE) --rm .
 
 push:
 	docker push $(REPO)
 
 bash:
-	docker run -rm -t -i $(IMAGE) /bin/bash
+	docker run --rm -t -i $(IMAGE) /bin/bash
