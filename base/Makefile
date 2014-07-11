@@ -6,6 +6,6 @@ REPO=mikz/base
 all: build
 
 build:
-	docker build -t $(REPO):precise -rm .
+	docker build -t $(REPO):trusty --rm .
 push:
 	docker push $(REPO)
