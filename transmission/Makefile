@@ -3,7 +3,7 @@ REPO=mikz/transmission
 all: build
 
 build:
-	docker build -t $(REPO) -rm .
+	docker build -t $(REPO) .
 push:
 	docker push $(REPO)
 bash:

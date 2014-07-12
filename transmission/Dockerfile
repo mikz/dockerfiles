@@ -1,4 +1,4 @@
-FROM mikz/base:precise
+FROM mikz/base:trusty
 MAINTAINER Michal Cichra <michal.cichra@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -10,8 +10,8 @@ RUN apt-add-repository -y ppa:transmissionbt/ppa \
 RUN adduser transmission --home /mnt/storage --disabled-password -q \
  && mkdir /var/run/sshd
 
-RUN apt-get -y install ruby1.9.1-dev rubygems cron \
- && gem1.9.1 install prss --no-rdoc --no-ri
+RUN apt-get -y install ruby ruby-dev cron build-essential
+RUN gem install prss --no-rdoc --no-ri
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
