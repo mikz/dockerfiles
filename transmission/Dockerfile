@@ -13,6 +13,8 @@ RUN adduser transmission --home /mnt/storage --disabled-password -q \
 RUN apt-get -y install ruby ruby-dev cron build-essential
 RUN gem install prss --no-rdoc --no-ri
 
+RUN apt-get -y install libcurl3
+
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
 ADD crontab /root/crontab
