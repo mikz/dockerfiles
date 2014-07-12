@@ -13,7 +13,11 @@ RUN apt-mark hold initscripts udev plymouth mountall \
  && chmod +x /usr/sbin/policy-rc.d \
  && echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
  && echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache \
- && echo 'APT {Install-Recommends="false";Install-Suggests="false";};' > /etc/apt/apt.conf.d/no-recommends
+ && echo 'APT {Install-Recommends="false";Install-Suggests="false";};' > /etc/apt/apt.conf.d/no-recommends \
+ && rm /etc/cron.weekly/fstrim \
+ && rm /etc/cron.daily/apt \
+ && rm /etc/cron.daily/dpkg \
+ && rm /etc/cron.daily/passwd
 
 RUN echo "apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*" > /usr/local/bin/apt-cleanup \
  && chmod +x /usr/local/bin/apt-cleanup \
