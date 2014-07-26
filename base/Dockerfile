@@ -23,10 +23,10 @@ RUN echo "apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/l
  && chmod +x /usr/local/bin/apt-cleanup \
  && echo "gem: --no-ri --no-rdoc" > /etc/gemrc
 
-RUN apt-get -q -y update \
- && apt-get -q -y install software-properties-common python-software-properties lsb-release wget language-pack-en \
+ADD apt-install /usr/local/bin/
+
+RUN apt-install software-properties-common python-software-properties lsb-release wget language-pack-en \
  && echo "Europe/Prague" > /etc/timezone \
- && dpkg-reconfigure -f noninteractive tzdata \
- && apt-cleanup
+ && dpkg-reconfigure -f noninteractive tzdata
 
 ENV LC_ALL en_US.UTF8

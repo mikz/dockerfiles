@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+apt-get update -y -q
+apt-get install -y -q "$@"
+apt-get -q -y clean 
+rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+exit 0
