@@ -9,4 +9,4 @@ push:
 bash:
 	docker run -t -i -v ~/storage:/mnt/storage $(REPO) /bin/bash
 run:
-	docker run -t -i -d -p 22 -p 51413:51413 -e 9091 -v ~/storage:/mnt/storage $(REPO)
+	docker run --daemon --port 22 --port 51413:51413 --expose 9091 --volume ~/storage:/mnt/storage $(REPO)
