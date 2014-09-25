@@ -19,6 +19,8 @@ RUN apt-mark hold initscripts udev plymouth mountall \
  && rm /etc/cron.daily/dpkg \
  && rm /etc/cron.daily/passwd
 
+RUN echo 'Yes, do as I say!' | apt-get remove bash -y -q --force-yes
+
 RUN echo "apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*" > /usr/local/bin/apt-cleanup \
  && chmod +x /usr/local/bin/apt-cleanup \
  && echo "gem: --no-ri --no-rdoc" > /etc/gemrc
