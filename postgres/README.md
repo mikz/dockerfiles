@@ -7,9 +7,8 @@ Has a configured volume /data which is initialized with new postgres database if
 ## Creating a hot slave
 
 ```shell
-docker run --detach --name postgres mikz/postgres
-docker stop postgres
-docker run -t -i --volumes-from postgres mikz/postgres bash
+docker create --name postgres mikz/postgres
+docker run -it --volumes-from postgres mikz/postgres bash
 
 $ rm -rf /data/*
 $ pg_basebackup -h yourserver -U replicator -v -P -D /data
