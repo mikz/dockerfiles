@@ -8,7 +8,7 @@ RUN adduser transmission --home /mnt/storage --disabled-password -q \
 
 RUN apt-add-repository -y ppa:transmissionbt/ppa \
  && apt-install supervisor transmission-cli transmission-daemon openssh-server \
-		ruby ruby-dev cron build-essential libcurl3 \
+		ruby ruby-dev cron build-essential libcurl3 zlib1g-dev \
  && gem install prss --version=0.1.1
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
